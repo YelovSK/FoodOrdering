@@ -28,7 +28,7 @@ public class OrderController : ControllerBase
         var orders = _orderService.GetOrders(USER_ID);
         if (onlyActive)
         {
-            return orders.Where(o => o.Status != eOrderStatus.Rejected && o.Status != eOrderStatus.Delivered).ToList();
+            return orders.Where(o => o.Status != eOrderStatus.Delivered).ToList();
         }
     
         return orders;
@@ -41,12 +41,19 @@ public class OrderController : ControllerBase
     }
     
     [HttpPost]
-    public OrderDto PayForOrder(int orderId)
+    public OrderDto PayOnlineBanking(int orderId)
     {
-        _orderService.PayOrder(orderId);
+        _orderService.PayOrder(orderId, eOrderPaymentMethod.OnlineBanking);
         return _orderService.GetOrder(orderId);
     }
 
+    [HttpPost]
+    public OrderDto PayBankTransfer(int orderId)
+    {
+        _orderService.PayOrder(orderId, eOrderPaymentMethod.BankTransfer);
+        return _orderService.GetOrder(orderId);
+    }
+    
     [HttpPost]
     public OrderDto AdvanceOrderStatus(int orderId)
     {

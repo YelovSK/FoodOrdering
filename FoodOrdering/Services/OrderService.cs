@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FoodOrdering.BusinessLogic.OrderState;
+using FoodOrdering.BusinessLogic.PaymentProcessor;
 using FoodOrdering.Dto;
 using FoodOrdering.Enums;
 using FoodOrdering.Exceptions;
@@ -20,15 +22,6 @@ public class OrderService : IOrderService
 
     public void UpdateOrderStatus(int orderId, eOrderStatus status)
     {
-        var order = _orderRepository.GetOrder(orderId);
-        
-        if (order == null)
-        {
-            throw new FoodOrderingException("Order not found");
-        }
-        
-        // Update the order status
-        order.Status = status;
         _orderRepository.UpdateOrderStatus(orderId, status);
         _orderRepository.Save();
     }
@@ -41,22 +34,10 @@ public class OrderService : IOrderService
             throw new FoodOrderingException("Order not found");
         }
         
-        switch (order.Status)
-        {
-            case eOrderStatus.Unpaid:
-                UpdateOrderStatus(orderId, eOrderStatus.Paid);
-                break;
-            case eOrderStatus.Paid:
-                UpdateOrderStatus(orderId, eOrderStatus.Rejected);
-                break;
-            case eOrderStatus.Rejected:
-                UpdateOrderStatus(orderId, eOrderStatus.Delivered);
-                break;
-            case eOrderStatus.Delivered:
-                throw new FoodOrderingException("Order already delivered");
-            default:
-                throw new FoodOrderingException("Unknown order status");
-        }
+        var context = new OrderContext(OrderContext.GetState(order.Status));
+        context.SetNextStatus();
+        
+        UpdateOrderStatus(orderId, context.OrderStatus);
     }
 
     public OrderDto AddOrder(int userId, Cart cart)
@@ -67,7 +48,7 @@ public class OrderService : IOrderService
         return _mapper.Map<Order, OrderDto>(order);
     }
 
-    public void PayOrder(int orderId)
+    public void PayOrder(int orderId, eOrderPaymentMethod paymentMethod)
     {
         var order = _orderRepository.GetOrder(orderId);
         if (order == null)
@@ -80,7 +61,16 @@ public class OrderService : IOrderService
             throw new FoodOrderingException("Order is already paid");
         }
         
-        UpdateOrderStatus(orderId, eOrderStatus.Paid);
+        PaymentProcessor paymentProcessor = paymentMethod switch
+        {
+            eOrderPaymentMethod.OnlineBanking => new OnlineBankingPaymentProcessor(order),
+            eOrderPaymentMethod.BankTransfer  => new BankTransferPaymentProcessor(order),
+            _                                 => throw new FoodOrderingException("Unknown payment method")
+        };
+        
+        order = paymentProcessor.ProcessPayment();
+        
+        UpdateOrderStatus(order.Id, order.Status);
     }
 
     public OrderDto GetOrder(int id)

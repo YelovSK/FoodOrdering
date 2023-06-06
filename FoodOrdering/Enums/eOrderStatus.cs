@@ -4,6 +4,11 @@ public enum eOrderStatus
 {
     Unpaid = 1,
     Paid = 2,
-    Rejected = 3,
-    Delivered = 4,
+    Delivered = 3,
+}
+
+public enum eOrderPaymentMethod
+{
+    OnlineBanking = 1,
+    BankTransfer = 2,
 }

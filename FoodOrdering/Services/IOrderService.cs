@@ -12,7 +12,7 @@ public interface IOrderService
     
     public OrderDto AddOrder(int userId, Cart cart);
     
-    public void PayOrder(int orderId);
+    public void PayOrder(int orderId, eOrderPaymentMethod eOrderPaymentMethod);
     
     public OrderDto GetOrder(int id);
     
