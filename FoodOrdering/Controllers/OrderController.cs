@@ -1,28 +1,56 @@
-using AutoMapper;
 using FoodOrdering.Dto;
-using FoodOrdering.Models;
-using FoodOrdering.Repositories;
+using FoodOrdering.Enums;
+using FoodOrdering.Facades;
+using FoodOrdering.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodOrdering.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class OrderController : ControllerBase
 {
-    private readonly IOrderRepository _orderRepository;
-    private readonly IMapper _mapper;
+    // Can't get mock identity user to work
+    private const int USER_ID = 1;
 
-    public OrderController(IOrderRepository orderRepository, IMapper mapper)
+    private readonly IOrderService _orderService;
+    private readonly OrderingFacade _orderingFacade;
+
+    public OrderController(IOrderService orderService, OrderingFacade orderingFacade)
     {
-        _orderRepository = orderRepository;
-        _mapper = mapper;
+        _orderService = orderService;
+        _orderingFacade = orderingFacade;
+    }
+
+    [HttpGet(Name = "GetOrders")]
+    public List<OrderDto> GetOrders(bool onlyActive = false)
+    {
+        var orders = _orderService.GetOrders(USER_ID);
+        if (onlyActive)
+        {
+            return orders.Where(o => o.Status != eOrderStatus.Rejected && o.Status != eOrderStatus.Delivered).ToList();
+        }
+    
+        return orders;
+    }
+
+    [HttpPost]
+    public OrderDto CreateOrder()
+    {
+        return _orderingFacade.CreateOrder(USER_ID);
     }
     
-    [HttpGet(Name = "GetAll")]
-    public IEnumerable<OrderDto> GetAll()
+    [HttpPost]
+    public OrderDto PayForOrder(int orderId)
     {
-        var orders = _orderRepository.GetOrders().ToList();
-        return _mapper.Map<List<Order>, List<OrderDto>>(orders);
+        _orderService.PayOrder(orderId);
+        return _orderService.GetOrder(orderId);
+    }
+
+    [HttpPost]
+    public OrderDto AdvanceOrderStatus(int orderId)
+    {
+        _orderService.AdvanceOrderStatus(orderId);
+        return _orderService.GetOrder(orderId);
     }
 }

@@ -5,7 +5,7 @@ namespace FoodOrdering.Models;
 public class User
 {
     public int Id { get; set; }
-
+    
     [Required]
     public string FirstName { get; set; }
 
@@ -14,5 +14,7 @@ public class User
 
     public string FullName => FirstName + " " + LastName;
 
-    public virtual List<Order> Orders { get; set; }
+    public string Email { get; set; }
+    
+    public ICollection<Order> Orders { get; set; }
 }

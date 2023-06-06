@@ -1,21 +1,29 @@
-using AutoMapper;
-using FoodOrdering.Dto;
+using FoodOrdering.Facades;
+using FoodOrdering.Middlewares;
 using FoodOrdering.Models;
 using FoodOrdering.Repositories;
+using FoodOrdering.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDbContext>();
 
-// Dependency injection
+// Dependency injection - repositories
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+// Dependency injection - services
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IFoodService, FoodService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserService, UserService>();
+// Dependency injection - other
+builder.Services.AddScoped<OrderingFacade>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
@@ -26,7 +34,6 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider
         .GetRequiredService<MyDbContext>();
     
-    // Here is the migration executed
     dbContext.Database.EnsureCreated();
     dbContext.Database.Migrate();
 }
@@ -39,9 +46,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

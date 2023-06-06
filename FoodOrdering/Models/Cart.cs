@@ -1,23 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using FoodOrdering.Enums;
 
 namespace FoodOrdering.Models;
 
-public class Order
+public class Cart
 {
     public int Id { get; set; }
-
+    
     [Required]
     [ForeignKey(nameof(User))]
     public int UserId { get; set; }
-
-    public User User { get; set; }
-
-    [Required]
-    public eOrderStatus Status { get; set; } = eOrderStatus.Unpaid;
-
-    public ICollection<OrderItem> Items { get; set; }
     
+    public User User { get; set; }
+    
+    public ICollection<CartItem> Items { get; set; }
+
     public decimal TotalPrice => Items.Sum(f => f.Food.Price * f.Quantity);
 }
