@@ -22,7 +22,7 @@ public class OrderingFacade
 
     public OrderDto CreateOrder(int userId)
     {
-        var cart = _cartRepository.GetCartByUserId(userId);
+        var cart = _cartRepository.SingleOrDefault(i => i.UserId == userId);
         if (cart == null)
         {
             throw new FoodOrderingException("Cart not found");
@@ -42,6 +42,7 @@ public class OrderingFacade
         if (quantity == 0)
         {
             _cartService.RemoveItemFromCart(userId, foodId);
+            return;
         }
         
         var cart = _cartService.GetCartByUserId(userId);

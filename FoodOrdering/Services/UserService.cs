@@ -19,7 +19,7 @@ public class UserService : IUserService
     
     public UserDto GetUser(int userId)
     {
-        var user = _userRepository.GetUser(userId);
+        var user = _userRepository.GetById(userId);
         if (user == null)
         {
             throw new FoodOrderingException("User not found");
@@ -30,7 +30,7 @@ public class UserService : IUserService
 
     public void UpdateEmail(int userId, string email)
     {
-        var user = _userRepository.GetUser(userId);
+        var user = _userRepository.GetById(userId);
         if (user == null)
         {
             throw new FoodOrderingException("User not found");

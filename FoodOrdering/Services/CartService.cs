@@ -19,7 +19,8 @@ public class CartService : ICartService
 
     public CartDto GetCartByUserId(int userId)
     {
-        var cart = _cartRepository.GetCartByUserId(userId);
+        var cart = _cartRepository.SingleOrDefault(i => i.UserId == userId);
+
         if (cart == null)
         {
             throw new FoodOrderingException("User not found");
@@ -36,7 +37,7 @@ public class CartService : ICartService
 
     public void RemoveItemFromCart(int userId, int foodId)
     {
-        var cart = _cartRepository.GetCartByUserId(userId);
+        var cart = _cartRepository.SingleOrDefault(i => i.UserId == userId);
         if (cart == null)
         {
             throw new FoodOrderingException("Cart not found");
@@ -48,6 +49,6 @@ public class CartService : ICartService
             throw new FoodOrderingException("Item not found");
         }
         
-        _cartRepository.RemoveItem(item.FoodId, item.CartId);
+        _cartRepository.RemoveItemFromCart(item.FoodId, item.CartId);
     }
 }

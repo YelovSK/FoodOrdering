@@ -2,11 +2,7 @@
 
 namespace FoodOrdering.Repositories;
 
-public interface IUserRepository
+public interface IUserRepository : IGenericRepository<User>
 {
-    User? GetUser(int userId);
-    
     void UpdateEmail(int userId, string email);
-
-    void Save();
 }

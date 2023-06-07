@@ -28,7 +28,7 @@ public class OrderService : IOrderService
 
     public void AdvanceOrderStatus(int orderId)
     {
-        var order = _orderRepository.GetOrder(orderId);
+        var order = _orderRepository.GetById(orderId);
         if (order == null)
         {
             throw new FoodOrderingException("Order not found");
@@ -50,7 +50,7 @@ public class OrderService : IOrderService
 
     public void PayOrder(int orderId, eOrderPaymentMethod paymentMethod)
     {
-        var order = _orderRepository.GetOrder(orderId);
+        var order = _orderRepository.GetById(orderId);
         if (order == null)
         {
             throw new FoodOrderingException("Order not found");
@@ -75,7 +75,7 @@ public class OrderService : IOrderService
 
     public OrderDto GetOrder(int id)
     {
-        var order = _orderRepository.GetOrder(id);
+        var order = _orderRepository.GetById(id);
         if (order == null)
         {
             throw new FoodOrderingException("Order not found");
@@ -86,7 +86,7 @@ public class OrderService : IOrderService
 
     public List<OrderDto> GetOrders(int userId)
     {
-        var orders = _orderRepository.GetOrders(userId);
+        var orders = _orderRepository.Find(i => i.UserId == userId);
 
         return _mapper.Map<List<Order>, List<OrderDto>>(orders.ToList());
     }

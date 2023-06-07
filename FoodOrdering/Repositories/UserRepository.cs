@@ -2,7 +2,7 @@
 
 namespace FoodOrdering.Repositories;
 
-public class UserRepository : RepositoryBase, IUserRepository
+public class UserRepository : GenericRepository<User>, IUserRepository
 {
     public UserRepository(MyDbContext context) : base(context)
     {

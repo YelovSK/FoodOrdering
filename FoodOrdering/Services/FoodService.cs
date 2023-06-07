@@ -19,7 +19,7 @@ public class FoodService : IFoodService
     
     public FoodDto GetFood(int foodId)
     {
-        var food = _foodRepository.GetFood(foodId);
+        var food = _foodRepository.GetById(foodId);
         if (food == null)
         {
             throw new FoodOrderingException("Food not found");

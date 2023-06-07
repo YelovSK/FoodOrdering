@@ -3,15 +3,10 @@ using FoodOrdering.Models;
 
 namespace FoodOrdering.Repositories;
 
-public class CartRepository : RepositoryBase, ICartRepository
+public class CartRepository : GenericRepository<Cart>, ICartRepository
 {
     public CartRepository(MyDbContext context) : base(context)
     {
-    }
-
-    public Cart? GetCartByUserId(int userId)
-    {
-        return _context.Carts.SingleOrDefault(i => i.UserId == userId);
     }
 
     public void AddFoodToCart(int cartId, int foodId, int quantity)
@@ -41,12 +36,14 @@ public class CartRepository : RepositoryBase, ICartRepository
         }
     }
 
-    public void RemoveItem(int itemFoodId, int itemCartId)
+    public void RemoveItemFromCart(int cartId, int foodId)
     {
-        _context.CartItems.Remove(new CartItem
+        var item = _context.CartItems.SingleOrDefault(i => i.FoodId == foodId && i.CartId == cartId);
+        if (item == null)
         {
-            FoodId = itemFoodId,
-            CartId = itemCartId,
-        });
+            throw new FoodOrderingException("Item not found");
+        }
+        
+        _context.CartItems.Remove(item);
     }
 }

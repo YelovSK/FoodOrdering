@@ -53,6 +53,13 @@ public class OrderController : ControllerBase
         _orderService.PayOrder(orderId, eOrderPaymentMethod.BankTransfer);
         return _orderService.GetOrder(orderId);
     }
+
+    [HttpPost]
+    public OrderDto Pay(int orderId, eOrderPaymentMethod paymentMethod)
+    {
+        _orderService.PayOrder(orderId, paymentMethod);
+        return _orderService.GetOrder(orderId);
+    }
     
     [HttpPost]
     public OrderDto AdvanceOrderStatus(int orderId)
