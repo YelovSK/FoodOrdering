@@ -12,16 +12,8 @@
 
 6. [State](BusinessLogic/OrderState)
 
-# Use cases
+# Docker
 
-1. Praca s kosikom
-- zobrazi sa list jedal v kosiku
-- pridanie jedal do kosika
-- odstranenie jedal z kosika
-2. Praca s objednavkou
-- vytvori sa objednavka z kosika
-- zaplati sa objednavka
-- zobrazi sa stav objednavky
-3. Praca s uctom
-- aktualizovanie udajov (e.g. email)
-- zobrazenie historie objednavok
+- docker pull
+
+- docker run --name postgres -e POSTGRES_USER=yelov -e POSTGRES_PASSWORD=password -p 5433:5432 -v /home/yelov:/var/lib/postgresql/data -d postgres
