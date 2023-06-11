@@ -4,7 +4,7 @@
 
 2. [DTO](Dto)
 
-3. [Dependency Injection + Inversion](Program.cs)
+3. [Strategy](BusinessLogic/DeliveryStrategy)
 
 4. [Facade](Facades)
 
@@ -14,6 +14,6 @@
 
 # Docker
 
-- docker pull
+- docker pull postgres
 
 - docker run --name postgres -e POSTGRES_USER=yelov -e POSTGRES_PASSWORD=password -p 5433:5432 -v /home/yelov:/var/lib/postgresql/data -d postgres

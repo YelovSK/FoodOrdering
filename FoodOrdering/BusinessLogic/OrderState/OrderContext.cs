@@ -1,36 +1,37 @@
-﻿using FoodOrdering.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FoodOrdering.BusinessLogic.OrderState;
+using FoodOrdering.Enums;
 using FoodOrdering.Exceptions;
 
-namespace FoodOrdering.BusinessLogic.OrderState;
+namespace FoodOrdering.Models;
 
-public class OrderContext
+public partial class Order
 {
-    public OrderState State { get; set; }
-
-    public eOrderStatus OrderStatus => State.GetOrderStatus();
-
-    public OrderContext(OrderState state)
-    {
-        State = state;
-    }
+    [NotMapped]
+    public OrderState? State { get; set; }
     
     public void SetNextStatus()
     {
+        State ??= GetState(Status);
+
         State.SetNextStatus(this);
     }
 
-    public static OrderState GetState(eOrderStatus status)
+    public void UpdateState()
     {
-        switch (status)
+        State ??= GetState(Status);
+
+        Status = State.GetOrderStatus();
+    }
+    
+    private static OrderState GetState(eOrderStatus status)
+    {
+        return status switch
         {
-            case eOrderStatus.Unpaid:
-                return new UnpaidOrder();
-            case eOrderStatus.Paid:
-                return new PaidOrder();
-            case eOrderStatus.Delivered:
-                return new DeliveredOrder();
-            default:
-                throw new FoodOrderingException("Invalid status");
-        }
+            eOrderStatus.Unpaid    => new UnpaidOrder(),
+            eOrderStatus.Paid      => new PaidOrder(),
+            eOrderStatus.Delivered => new DeliveredOrder(),
+            _                      => throw new FoodOrderingException("Invalid status")
+        };
     }
 }

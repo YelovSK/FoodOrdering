@@ -4,12 +4,10 @@ using FoodOrdering.Enums;
 
 namespace FoodOrdering.Models;
 
-public class Order
+public partial class Order
 {
     public int Id { get; set; }
 
-    public string Message { get; set; } = string.Empty;
-    
     [Required]
     [ForeignKey(nameof(User))]
     public int UserId { get; set; }
@@ -19,6 +17,10 @@ public class Order
     [Required]
     public eOrderStatus Status { get; set; } = eOrderStatus.Unpaid;
 
+    public string Address { get; set; }
+    
+    public eDeliveryType DeliveryType { get; set; }
+    
     public ICollection<OrderItem> Items { get; set; }
     
     public decimal TotalPrice => Items.Sum(f => f.Food.Price * f.Quantity);

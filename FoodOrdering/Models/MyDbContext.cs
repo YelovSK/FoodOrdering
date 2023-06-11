@@ -1,5 +1,4 @@
-﻿using FoodOrdering.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace FoodOrdering.Models;
 
@@ -8,6 +7,7 @@ public class MyDbContext : DbContext
     private const string CONNECTION_STRING = @"Server=localhost;Port=5433;Database=postgres;User Id=yelov;Password=password;Include Error Detail=true;";
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<Food> Foods { get; set; }
@@ -33,6 +33,7 @@ public class MyDbContext : DbContext
         builder.Entity<Order>().Navigation(i => i.Items).AutoInclude();
         builder.Entity<Order>().Navigation(i => i.User).AutoInclude();
         builder.Entity<User>().Navigation(i => i.Orders).AutoInclude();
+        builder.Entity<User>().Navigation(i => i.Notifications).AutoInclude();
         
         // Seed users
         builder.Entity<User>().HasData(
@@ -40,19 +41,11 @@ public class MyDbContext : DbContext
             {
                 Id = 1,
                 FirstName = "John",
-                LastName = "Doe",
-                Email = "lmfao#xddd.com",
+                LastName = "Deez",
+                Email = "address#domain.com",
+                Address = "Vyštug 322",
             });
 
-        // Seed orders
-        builder.Entity<Order>().HasData(
-            new Order
-            {
-                Id = 1,
-                UserId = 1,
-                Status = eOrderStatus.Unpaid,
-            });
-        
         // Seed carts
         builder.Entity<Cart>().HasData(
             new Cart
@@ -80,6 +73,12 @@ public class MyDbContext : DbContext
                 Id = 3,
                 Name = "Fries",
                 Price = 2m,
+            },
+            new Food
+            {
+                Id = 4,
+                Name = "Hot-dog",
+                Price = 1.5m,
             });
     }
 }

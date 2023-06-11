@@ -35,9 +35,9 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public OrderDto CreateOrder()
+    public OrderDto CreateOrder(eDeliveryType deliveryType)
     {
-        return _orderingFacade.CreateOrder(USER_ID);
+        return _orderingFacade.CreateOrder(USER_ID, deliveryType);
     }
     
     [HttpPost]

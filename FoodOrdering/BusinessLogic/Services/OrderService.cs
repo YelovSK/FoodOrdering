@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FoodOrdering.BusinessLogic.DeliveryStrategy;
 using FoodOrdering.BusinessLogic.OrderState;
 using FoodOrdering.BusinessLogic.PaymentProcessor;
 using FoodOrdering.Dto;
@@ -20,12 +21,6 @@ public class OrderService : IOrderService
         _mapper = mapper;
     }
 
-    public void UpdateOrderStatus(int orderId, eOrderStatus status)
-    {
-        _orderRepository.UpdateOrderStatus(orderId, status);
-        _orderRepository.Save();
-    }
-
     public void AdvanceOrderStatus(int orderId)
     {
         var order = _orderRepository.GetById(orderId);
@@ -34,15 +29,22 @@ public class OrderService : IOrderService
             throw new FoodOrderingException("Order not found");
         }
         
-        var context = new OrderContext(OrderContext.GetState(order.Status));
-        context.SetNextStatus();
-        
-        UpdateOrderStatus(orderId, context.OrderStatus);
+        order.SetNextStatus();
+        order.UpdateState();
+
+        _orderRepository.Save();
     }
 
-    public OrderDto AddOrder(int userId, Cart cart)
+    public OrderDto AddOrder(int userId, Cart cart, eDeliveryType deliveryType)
     {
         var order = _orderRepository.AddOrder(userId, cart);
+        IDeliveryStrategy strategy = deliveryType switch
+        {
+            eDeliveryType.HomeDelivery   => new HomeDelivery(),
+            eDeliveryType.BranchDelivery => new BranchDelivery(),
+            _                            => throw new FoodOrderingException("Delivery type not found")
+        };
+        new DeliveryService(order, strategy).Execute();
         _orderRepository.Save();
         
         return _mapper.Map<Order, OrderDto>(order);
@@ -60,17 +62,23 @@ public class OrderService : IOrderService
         {
             throw new FoodOrderingException("Order is already paid");
         }
+
+        var notification = new Notification
+        {
+            UserId = order.UserId,
+            SentDate = DateTime.UtcNow,
+        };
         
         PaymentProcessor paymentProcessor = paymentMethod switch
         {
-            eOrderPaymentMethod.OnlineBanking => new OnlineBankingPaymentProcessor(order),
-            eOrderPaymentMethod.BankTransfer  => new BankTransferPaymentProcessor(order),
+            eOrderPaymentMethod.OnlineBanking => new OnlineBankingPaymentProcessor(order, notification),
+            eOrderPaymentMethod.BankTransfer  => new BankTransferPaymentProcessor(order, notification),
             _                                 => throw new FoodOrderingException("Unknown payment method")
         };
         
-        order = paymentProcessor.ProcessPayment();
+        paymentProcessor.ProcessPayment();
         
-        UpdateOrderStatus(order.Id, order.Status);
+        _orderRepository.Save();
     }
 
     public OrderDto GetOrder(int id)

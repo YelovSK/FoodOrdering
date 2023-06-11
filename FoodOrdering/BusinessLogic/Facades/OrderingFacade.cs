@@ -1,4 +1,6 @@
-﻿using FoodOrdering.Dto;
+﻿using FoodOrdering.BusinessLogic.DeliveryStrategy;
+using FoodOrdering.Dto;
+using FoodOrdering.Enums;
 using FoodOrdering.Exceptions;
 using FoodOrdering.Repositories;
 using FoodOrdering.Services;
@@ -20,7 +22,7 @@ public class OrderingFacade
         _cartRepository = cartRepository;
     }
 
-    public OrderDto CreateOrder(int userId)
+    public OrderDto CreateOrder(int userId, eDeliveryType deliveryType)
     {
         var cart = _cartRepository.SingleOrDefault(i => i.UserId == userId);
         if (cart == null)
@@ -28,7 +30,7 @@ public class OrderingFacade
             throw new FoodOrderingException("Cart not found");
         }
 
-        return _orderService.AddOrder(userId, cart);
+        return _orderService.AddOrder(userId, cart, deliveryType);
     }
     
     public void AddFoodToCart(int userId, int foodId, int quantity)

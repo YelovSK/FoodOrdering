@@ -11,25 +11,14 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
     {
     }
 
-    public void UpdateOrderStatus(int orderId, eOrderStatus status)
-    {
-        var order = _context.Orders.Find(orderId);
-        if (order == null)
-        {
-            throw new FoodOrderingException("Order not found");
-        }
-
-        _context.Orders.Attach(order);
-        order.Status = status;
-        _context.Entry(order).State = EntityState.Modified;
-    }
-
     public Order AddOrder(int userId, Cart cart)
     {
         var order = new Order
         {
             UserId = userId,
             Status = eOrderStatus.Unpaid,
+            Address = string.Empty,
+            DeliveryType = 0,
         };
     
         _context.Orders.Add(order);

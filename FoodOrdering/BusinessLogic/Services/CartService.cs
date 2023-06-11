@@ -10,7 +10,7 @@ public class CartService : ICartService
 {
     private readonly ICartRepository _cartRepository;
     private readonly IMapper _mapper;
-    
+
     public CartService(ICartRepository cartRepository, IMapper mapper)
     {
         _cartRepository = cartRepository;
@@ -31,7 +31,30 @@ public class CartService : ICartService
 
     public void AddItemToCart(int userId, int foodId, int quantity)
     {
-        _cartRepository.AddFoodToCart(userId, foodId, quantity);
+        var cart = _cartRepository.SingleOrDefault(i => i.UserId == userId);
+        if (cart == null)
+        {
+            throw new FoodOrderingException("Cart not found");
+        }
+
+        var item = cart.Items.SingleOrDefault(i => i.FoodId == foodId);
+
+        // Update quantity of existing food
+        if (item != null)
+        {
+            item.Quantity = quantity;
+        }
+        // Add new food
+        else
+        {
+            cart.Items.Add(new CartItem()
+            {
+                CartId = cart.Id,
+                FoodId = foodId,
+                Quantity = quantity,
+            });
+        }
+
         _cartRepository.Save();
     }
 
@@ -43,12 +66,13 @@ public class CartService : ICartService
             throw new FoodOrderingException("Cart not found");
         }
 
-        var item = cart.Items.FirstOrDefault(i => i.FoodId == foodId);
+        var item = cart.Items.SingleOrDefault(i => i.FoodId == foodId);
         if (item == null)
         {
             throw new FoodOrderingException("Item not found");
         }
-        
-        _cartRepository.RemoveItemFromCart(item.FoodId, item.CartId);
+
+        cart.Items.Remove(item);
+        _cartRepository.Save();
     }
 }

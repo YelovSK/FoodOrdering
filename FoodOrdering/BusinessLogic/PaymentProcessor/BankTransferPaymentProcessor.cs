@@ -1,24 +1,24 @@
 ﻿using FoodOrdering.Enums;
-using FoodOrdering.Exceptions;
 using FoodOrdering.Models;
 
 namespace FoodOrdering.BusinessLogic.PaymentProcessor;
 
 public class BankTransferPaymentProcessor : PaymentProcessor
 {
-    public BankTransferPaymentProcessor(Order order) : base(order)
+    public BankTransferPaymentProcessor(Order order, Notification notification) : base(order, notification)
     {
     }
 
     protected override void PerformPayment()
     {
-        if (Order.Status != eOrderStatus.Unpaid)
-        {
-            throw new FoodOrderingException("Order is not in unpaid state");
-        }
+        base.PerformPayment();
 
         Order.Status = eOrderStatus.Paid;
-        Order.Message = "Performed bank transfer payment";
-        Console.WriteLine("Performing bank transfer payment...");
+    }
+
+    protected override void SetNotification()
+    {
+        Notification.Message = $"Performed bank transfer payment for order {Order.Id}";
+        Order.User.Notifications.Add(Notification);
     }
 }

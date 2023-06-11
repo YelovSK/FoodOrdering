@@ -1,27 +1,34 @@
-﻿using FoodOrdering.Models;
+﻿using FoodOrdering.Enums;
+using FoodOrdering.Exceptions;
+using FoodOrdering.Models;
 
 namespace FoodOrdering.BusinessLogic.PaymentProcessor;
 
 public abstract class PaymentProcessor
 {
     protected readonly Order Order;
+    protected readonly Notification Notification;
     
-    protected PaymentProcessor(Order order)
+    protected PaymentProcessor(Order order, Notification notification)
     {
         Order = order;
+        Notification = notification;
     }
 
     public Order ProcessPayment()
     {
         PerformPayment();
-        DisplayPaymentConfirmation();
+        SetNotification();
         return Order;
     }
 
-    protected abstract void PerformPayment();
-
-    protected virtual void DisplayPaymentConfirmation()
+    protected virtual void PerformPayment()
     {
-        Console.WriteLine("Payment processed successfully.");
+        if (Order.Status != eOrderStatus.Unpaid)
+        {
+            throw new FoodOrderingException("Order is not in unpaid state");
+        }
     }
+
+    protected abstract void SetNotification();
 }

@@ -15,4 +15,6 @@ public class UserInfoDto
 public class UserDto : UserInfoDto
 {
     public List<OrderDto> Orders { get; set; } = new();
+    
+    public List<NotificationDto> Notifications { get; set; } = new();
 }
