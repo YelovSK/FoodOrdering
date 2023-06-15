@@ -5,17 +5,17 @@ namespace FoodOrdering.Services;
 
 public class DeliveryService
 {
-    private readonly Order order;
-    private IDeliveryStrategy strategy;
+    private readonly Order _order;
+    private readonly IDeliveryStrategy _strategy;
 
     public DeliveryService(Order order, IDeliveryStrategy strategy)
     {
-        this.order = order;
-        this.strategy = strategy;
+        _order = order;
+        _strategy = strategy;
     }
 
     public void Execute()
     {
-        strategy.SetDelivery(order);
+        _strategy.SetDelivery(_order);
     }
 }

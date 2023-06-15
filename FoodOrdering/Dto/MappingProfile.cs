@@ -11,9 +11,9 @@ public class MappingProfile : Profile
             dest => dest.DeliveryType,
             opt => opt.MapFrom(src => src.DeliveryType.ToString())
         );
+        CreateMap<User, FullUserDto>();
         CreateMap<User, UserDto>();
-        CreateMap<User, UserInfoDto>();
-        CreateMap<UserDto, UserInfoDto>();
+        CreateMap<FullUserDto, UserDto>();
         CreateMap<Cart, CartDto>();
         CreateMap<CartItem, FoodItemDto>();
         CreateMap<OrderItem, FoodItemDto>();

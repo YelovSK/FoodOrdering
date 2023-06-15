@@ -1,30 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="FoodOrdering.Controllers.OrderController">
-    <Position X="1.25" Y="4.5" Width="1.5" />
+  <Class Name="FoodOrdering.BusinessLogic.DeliveryStrategy.BranchDelivery" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="13.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAARAAAAAYAgAAgCCAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
-      <FileName>Controllers\OrderController.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAACAAAAA=</HashCode>
+      <FileName>BusinessLogic\DeliveryStrategy\BranchDelivery.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_orderingFacade" />
-      <Field Name="_orderService" />
-    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="FoodOrdering.Services.OrderService">
-    <Position X="7.5" Y="5" Width="1.5" />
+  <Class Name="FoodOrdering.BusinessLogic.DeliveryStrategy.HomeDelivery" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="13.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAgAAAAAAAAAACBAAAACAAAAAAAgAAAABAAAAA=</HashCode>
-      <FileName>BusinessLogic\Services\OrderService.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>BusinessLogic\DeliveryStrategy\HomeDelivery.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_mapper" />
-      <Field Name="_orderRepository" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.21" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FoodOrdering.Facades.OrderingFacade">
-    <Position X="1.25" Y="8.25" Width="1.5" />
+    <Position X="17.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAQAAAAAAAEAAAgAAEAAAAAACAAAAAAAAA=</HashCode>
       <FileName>BusinessLogic\Facades\OrderingFacade.cs</FileName>
@@ -32,12 +25,179 @@
     <ShowAsAssociation>
       <Field Name="_cartRepository" />
       <Field Name="_cartService" />
-      <Field Name="_orderService" />
       <Field Name="_foodService" />
+      <Field Name="_orderService" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="FoodOrdering.BusinessLogic.OrderState.DeliveredOrder">
+    <Position X="6.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\OrderState\DeliveredOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.BusinessLogic.OrderState.OrderState">
+    <Position X="8.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\OrderState\OrderState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.BusinessLogic.OrderState.PaidOrder">
+    <Position X="8.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\OrderState\PaidOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.BusinessLogic.OrderState.UnpaidOrder">
+    <Position X="11" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\OrderState\UnpaidOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.Order" Collapsed="true">
+    <Position X="26.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAEQEAAAACAAAAAAAAAgAAAEAQAACAAAABAAAAAA=</HashCode>
+      <FileName>BusinessLogic\OrderState\OrderContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="State" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FoodOrdering.Models.Cart" Collapsed="true">
+    <Position X="24.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAACAAAAAAAAAgAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.CartItem" Collapsed="true">
+    <Position X="24.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAggAACAA=</HashCode>
+      <FileName>Models\CartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.Food" Collapsed="true">
+    <Position X="23" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Food.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.MyDbContext">
+    <Position X="24.75" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAECAAgQEgAAAAAAAACAAAEAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MyDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.Notification" Collapsed="true">
+    <Position X="23" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAgAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Notification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.OrderItem" Collapsed="true">
+    <Position X="26.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAggAAAAA=</HashCode>
+      <FileName>Models\OrderItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Models.User" Collapsed="true">
+    <Position X="23" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAEAAACAgAIAAAAAAAAAAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.BusinessLogic.PaymentProcessor.BankTransferPaymentProcessor">
+    <Position X="14.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\PaymentProcessor\BankTransferPaymentProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.BusinessLogic.PaymentProcessor.OnlineBankingPaymentProcessor">
+    <Position X="17.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\PaymentProcessor\OnlineBankingPaymentProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.BusinessLogic.PaymentProcessor.PaymentProcessor">
+    <Position X="16.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAACAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\PaymentProcessor\PaymentProcessor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Notification" />
+      <Field Name="Order" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FoodOrdering.Services.CartService" BaseTypeListCollapsed="true">
+    <Position X="19" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAgAAAAAAFAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\CartService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_cartRepository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoodOrdering.Services.DeliveryService">
+    <Position X="21.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAQACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\DeliveryService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_order" />
+      <Field Name="_strategy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FoodOrdering.Services.FoodService" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAABAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\FoodService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_foodRepository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoodOrdering.Services.OrderService" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAgAAAAAAAAAACBAAAACAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\OrderService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_orderRepository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoodOrdering.Services.UserService" BaseTypeListCollapsed="true">
+    <Position X="20.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\UserService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_userRepository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
   <Class Name="FoodOrdering.Controllers.CartController">
-    <Position X="3" Y="3.25" Width="1.5" />
+    <Position X="24.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAACAAAEAggAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\CartController.cs</FileName>
@@ -47,235 +207,93 @@
       <Field Name="_orderingFacade" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="FoodOrdering.Controllers.OrderController">
+    <Position X="23" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAARAAAAAYAgAAgCCAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Controllers\OrderController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_orderingFacade" />
+      <Field Name="_orderService" />
+    </ShowAsAssociation>
+  </Class>
   <Class Name="FoodOrdering.Controllers.UserController">
-    <Position X="5.25" Y="3.25" Width="1.5" />
+    <Position X="26.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACCAAABAACABAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Controllers\UserController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="_mapper" />
       <Field Name="_userService" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="FoodOrdering.Dto.CartDto" Collapsed="true">
-    <Position X="16.75" Y="6.5" Width="1.5" />
+  <Class Name="FoodOrdering.Dto.CartDto">
+    <Position X="8" Y="17" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAACAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dto\CartDto.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FoodOrdering.Dto.FoodDto" Collapsed="true">
-    <Position X="18.5" Y="6.5" Width="1.5" />
+  <Class Name="FoodOrdering.Dto.FoodDto">
+    <Position X="8" Y="19.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dto\FoodDto.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FoodOrdering.Dto.FoodItemDto" Collapsed="true">
-    <Position X="20.25" Y="6.5" Width="1.5" />
+  <Class Name="FoodOrdering.Dto.FoodItemDto">
+    <Position X="9.75" Y="17" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAggAAAAA=</HashCode>
       <FileName>Dto\FoodItemDto.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FoodOrdering.Dto.MappingProfile" Collapsed="true">
-    <Position X="17.75" Y="5.25" Width="1.5" />
+  <Class Name="FoodOrdering.Dto.UserDto">
+    <Position X="6.25" Y="17" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Dto\MappingProfile.cs</FileName>
+      <HashCode>AAAAAEAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Dto\FullUserDto.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FoodOrdering.Dto.OrderDto" Collapsed="true">
-    <Position X="16.75" Y="7.5" Width="1.5" />
+  <Class Name="FoodOrdering.Dto.FullUserDto">
+    <Position X="6.25" Y="19.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAEAAAACAACAAAAAAAAAAAAQAAAAAAAIAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dto\FullUserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Dto.NotificationDto">
+    <Position X="11.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Dto\NotificationDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoodOrdering.Dto.OrderDto">
+    <Position X="9.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQEAAAACAACAAAAAAAAAAAAQAACAAAAAAAAAAA=</HashCode>
       <FileName>Dto\OrderDto.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FoodOrdering.Dto.UserInfoDto" Collapsed="true">
-    <Position X="15" Y="6.5" Width="1.5" />
+  <Class Name="FoodOrdering.Exceptions.FoodOrderingException" Collapsed="true">
+    <Position X="27" Y="5.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
-      <FileName>Dto\UserDto.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Dto.UserDto" Collapsed="true">
-    <Position X="15" Y="7.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Dto\UserDto.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.OrderState.DeliveredOrder">
-    <Position X="11.5" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\OrderState\DeliveredOrder.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.OrderState.OrderContext">
-    <Position X="10.75" Y="1.5" Width="1.5" />
-    <AssociationLine Name="State" Type="FoodOrdering.BusinessLogic.OrderState.OrderState" FixedToPoint="true">
-      <Path>
-        <Point X="12.25" Y="2.375" />
-        <Point X="13.75" Y="2.375" />
-      </Path>
-    </AssociationLine>
-    <TypeIdentifier>
-      <HashCode>AAAAAEAAAAACAAAAAAAAAAAAAAEAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>BusinessLogic\OrderState\OrderContext.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="State" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.OrderState.OrderState">
-    <Position X="13.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\OrderState\OrderState.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.OrderState.PaidOrder">
-    <Position X="13.75" Y="3.75" Width="1.5" />
-    <InheritanceLine Type="FoodOrdering.BusinessLogic.OrderState.OrderState" FixedToPoint="true">
-      <Path>
-        <Point X="14.5" Y="3.046" />
-        <Point X="14.5" Y="3.75" />
-      </Path>
-    </InheritanceLine>
-    <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\OrderState\PaidOrder.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.OrderState.UnpaidOrder">
-    <Position X="15.75" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\OrderState\UnpaidOrder.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.PaymentProcessor.BankTransferPaymentProcessor">
-    <Position X="5.75" Y="8.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\PaymentProcessor\BankTransferPaymentProcessor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.PaymentProcessor.OnlineBankingPaymentProcessor">
-    <Position X="9.5" Y="9.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\PaymentProcessor\OnlineBankingPaymentProcessor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.BusinessLogic.PaymentProcessor.PaymentProcessor">
-    <Position X="7.5" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\PaymentProcessor\PaymentProcessor.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="Order" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="FoodOrdering.Services.CartService" BaseTypeListCollapsed="true">
-    <Position X="1.75" Y="12.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAgAAAAAAFAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\Services\CartService.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_cartRepository" />
-      <Field Name="_mapper" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.181" Collapsed="true" />
-  </Class>
-  <Class Name="FoodOrdering.Services.FoodService" BaseTypeListCollapsed="true">
-    <Position X="4" Y="13" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAEAAAAAAAABAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\Services\FoodService.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_foodRepository" />
-      <Field Name="_mapper" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="FoodOrdering.Services.UserService" BaseTypeListCollapsed="true">
-    <Position X="6" Y="14.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAgACAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\Services\UserService.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_mapper" />
-      <Field Name="_userRepository" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="FoodOrdering.Models.Cart" Collapsed="true">
-    <Position X="18.25" Y="10" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAADAAAAAAAACAAAAAAAAAgAAAAAQAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Cart.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Models.CartItem" Collapsed="true">
-    <Position X="20" Y="10" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAggAACAA=</HashCode>
-      <FileName>Models\CartItem.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Models.Food" Collapsed="true">
-    <Position X="21.75" Y="10" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Food.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Models.MyDbContext">
-    <Position X="19.75" Y="13.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAECAAgQEAAAAAAAAACAAAEAAQAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\MyDbContext.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Models.Order" Collapsed="true">
-    <Position X="20" Y="11" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAADAAAEAAAACAAAAAAAAAgAAAAAQAAAAAAAIAAAAAA=</HashCode>
-      <FileName>Models\Order.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Models.OrderItem" Collapsed="true">
-    <Position X="21.75" Y="11" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAggAAAAA=</HashCode>
-      <FileName>Models\OrderItem.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FoodOrdering.Models.User" Collapsed="true">
-    <Position X="18.25" Y="11" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAECAEAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
-      <FileName>Models\User.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\FoodOrderingException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FoodOrdering.Repositories.CartRepository">
-    <Position X="13.75" Y="18.25" Width="1.5" />
+    <Position X="7" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\CartRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FoodOrdering.Repositories.FoodRepository">
-    <Position X="18.25" Y="18.25" Width="1.5" />
+    <Position X="9.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\FoodRepository.cs</FileName>
@@ -283,7 +301,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FoodOrdering.Repositories.GenericRepository&lt;T&gt;">
-    <Position X="17.25" Y="14" Width="1.5" />
+    <Position X="10.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAIAIAAAABAAAAAAABAAAAAAIAAAAAgAAAIAEAIA=</HashCode>
       <FileName>Repositories\GenericRepository.cs</FileName>
@@ -294,87 +312,111 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FoodOrdering.Repositories.OrderRepository">
-    <Position X="20.5" Y="18.25" Width="1.5" />
+    <Position X="11.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\OrderRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FoodOrdering.Repositories.UserRepository">
-    <Position X="16" Y="18.25" Width="1.5" />
+    <Position X="13.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Repositories\UserRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="FoodOrdering.Services.IOrderService">
-    <Position X="4.75" Y="5.75" Width="1.25" />
+  <Interface Name="FoodOrdering.BusinessLogic.DeliveryStrategy.IDeliveryStrategy">
+    <Position X="24.75" Y="11.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAgAAAAAAAAAACAAAAACAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>BusinessLogic\Services\Interfaces\IOrderService.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="FoodOrdering.Repositories.ICartRepository">
-    <Position X="8.25" Y="11.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Repositories\Interfaces\ICartRepository.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>BusinessLogic\DeliveryStrategy\IDeliveryStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FoodOrdering.Services.ICartService">
-    <Position X="4.5" Y="10.25" Width="1.5" />
+    <Position X="19" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAgAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BusinessLogic\Services\Interfaces\ICartService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FoodOrdering.Services.IFoodService">
-    <Position X="2" Y="10.75" Width="1.5" />
+    <Position X="15.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BusinessLogic\Services\Interfaces\IFoodService.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="FoodOrdering.Repositories.IGenericRepository&lt;T&gt;">
-    <Position X="11.5" Y="8" Width="1.5" />
+  <Interface Name="FoodOrdering.Services.IOrderService">
+    <Position X="17.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAIAIAAAAAAAAAAAABAAAAAAIAAAAAgAAAIAEAIA=</HashCode>
-      <FileName>Repositories\Interfaces\IGenericRepository.cs</FileName>
+      <HashCode>AAAAAQAgAAAAAAAAAACAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\Interfaces\IOrderService.cs</FileName>
     </TypeIdentifier>
-  </Interface>
-  <Interface Name="FoodOrdering.Repositories.IFoodRepository">
-    <Position X="10.5" Y="11.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Repositories\Interfaces\IFoodRepository.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="FoodOrdering.Repositories.IOrderRepository">
-    <Position X="12.75" Y="11.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>Repositories\Interfaces\IOrderRepository.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="FoodOrdering.Repositories.IUserRepository">
-    <Position X="15" Y="11.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Repositories\Interfaces\IUserRepository.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="AutoMapper.IMapper" Collapsed="true">
-    <Position X="11" Y="5.75" Width="1.5" />
-    <TypeIdentifier />
   </Interface>
   <Interface Name="FoodOrdering.Services.IUserService">
-    <Position X="8.75" Y="3.25" Width="1.5" />
+    <Position X="20.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>BusinessLogic\Services\Interfaces\IUserService.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="FoodOrdering.Repositories.ICartRepository">
+    <Position X="11.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interfaces\ICartRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoodOrdering.Repositories.IFoodRepository">
+    <Position X="13.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interfaces\IFoodRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoodOrdering.Repositories.IGenericRepository&lt;T&gt;">
+    <Position X="10.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAIAAAAAAAAAAAABAAAAAAIAAAAAgAAAIAEAIA=</HashCode>
+      <FileName>Repositories\Interfaces\IGenericRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoodOrdering.Repositories.IOrderRepository">
+    <Position X="7" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interfaces\IOrderRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoodOrdering.Repositories.IUserRepository">
+    <Position X="9.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interfaces\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FoodOrdering.Enums.eDeliveryType">
+    <Position X="22.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\eDeliveryType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoodOrdering.Enums.eOrderPaymentMethod">
+    <Position X="24" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\eOrderPaymentMethod.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoodOrdering.Enums.eOrderStatus">
+    <Position X="25.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAIAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\eOrderStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

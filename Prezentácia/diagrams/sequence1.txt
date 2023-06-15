@@ -1,11 +1,9 @@
 title Aktualizácia košíka
 
-activate CartController
-activate OrderFacade
-activate CartService
-activate CartRepository
 
+activate CartController
 CartController->OrderFacade:AddFoodToCart
+activate OrderFacade
 
 break quantity<0
 OrderFacade-->CartController: throw
@@ -13,19 +11,28 @@ end
 
 alt quantity == 0
 OrderFacade->CartService:RemoveItem
+activate CartService
 CartService->CartRepository:GetCart
+activate CartRepository
 CartRepository-->CartService:return
+deactivate CartRepository
 
 CartService->CartRepository:RemoveItem
-CartRepository-->CartService:void
-CartService-->OrderFacade:void
-OrderFacade-->CartController:void
+activate CartRepository
+CartRepository-->CartService:
+deactivate CartRepository
+CartService-->OrderFacade:
+deactivate CartService
+
+OrderFacade-->CartController:
 
 else quantity > 0
 OrderFacade->CartService:AddItemToCart
+activate CartService
 CartService->CartRepository:AddFood
-activate DbContext
+activate CartRepository
 CartRepository->DbContext:GetCartItem
+activate DbContext
 DbContext-->CartRepository:return
 deactivate DbContext
 alt cartItem != null
@@ -33,12 +40,16 @@ activate DbContext
 CartRepository->DbContext:UpdateCartItem
 deactivate DbContext
 else cartItem == null
-activate DbContext
 CartRepository->DbContext:AddCartItem
-DbContext-->CartRepository:void
+activate DbContext
+DbContext-->CartRepository:
 deactivate DbContext
-CartRepository-->CartService:void
-CartService-->OrderFacade:void
-OrderFacade-->CartController:void
+CartRepository-->CartService:
+deactivate CartRepository
+CartService-->OrderFacade:
+deactivate CartService
+OrderFacade-->CartController:
+deactivate OrderFacade
 end
+deactivate CartController
 end

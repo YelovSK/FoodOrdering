@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace FoodOrdering.Enums;
+﻿namespace FoodOrdering.Enums;
 
 public enum eOrderStatus
 {

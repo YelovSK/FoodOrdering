@@ -1,7 +1,5 @@
 ﻿using FoodOrdering.Enums;
-using FoodOrdering.Exceptions;
 using FoodOrdering.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace FoodOrdering.Repositories;
 
@@ -20,10 +18,10 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
             Address = string.Empty,
             DeliveryType = 0,
         };
-    
+
         _context.Orders.Add(order);
         Save();
-    
+
         // Map cart items to order items
         foreach (var item in cart.Items)
         {
@@ -34,7 +32,7 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
                 Quantity = item.Quantity,
             });
         }
-        
+
         return order;
     }
 }

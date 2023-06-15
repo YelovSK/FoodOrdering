@@ -22,20 +22,20 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public UserInfoDto Get()
+    public UserDto Get()
     {
         var user = _userService.GetUser(USER_ID);
-        return _mapper.Map<UserInfoDto>(user);
+        return _mapper.Map<UserDto>(user);
     }
 
     [HttpGet]
-    public UserDto GetWithOrders()
+    public FullUserDto GetWithOrders()
     {
         return _userService.GetUser(USER_ID);
     }
     
     [HttpPost]
-    public UserDto UpdateEmail(string email)
+    public FullUserDto UpdateEmail(string email)
     {
         _userService.UpdateEmail(USER_ID, email);
         return _userService.GetUser(USER_ID);

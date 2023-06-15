@@ -5,7 +5,7 @@ namespace FoodOrdering.BusinessLogic.DeliveryStrategy;
 
 public class BranchDelivery : IDeliveryStrategy
 {
-    private const string RANDOM_BRANCH_ADDRESS_I_GUESS = "Random branch address";
+    private const string DUMMY_BRANCH_ADDRESS = "Restaurant 322, Uganda";
     
     public void SetDelivery(Order order)
     {
@@ -15,13 +15,13 @@ public class BranchDelivery : IDeliveryStrategy
         {
             UserId = order.User.Id,
             SentDate = DateTime.UtcNow,
-            Message = $"Delivery of order {order.Id} is set to {RANDOM_BRANCH_ADDRESS_I_GUESS}",
+            Message = $"Delivery of order {order.Id} is set to {DUMMY_BRANCH_ADDRESS}",
         });
     }
 
     private string GetClosestBranchAddress()
     {
-        // Imagine some logic here
-        return RANDOM_BRANCH_ADDRESS_I_GUESS;
+        // Um, imagine some logic here
+        return DUMMY_BRANCH_ADDRESS;
     }
 }

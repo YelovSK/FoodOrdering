@@ -1,0 +1,43 @@
+title Platba objednávky
+
+activate OrderController
+
+OrderController->OrderService:PayOrder
+activate OrderService
+
+OrderService->OrderRepository:RequestOrder
+activate OrderRepository
+OrderRepository-->OrderService:return
+deactivate OrderRepository
+
+break order==null
+OrderService-->OrderController:throw
+end
+
+break order.status==unpaid
+OrderService-->OrderController:throw
+end
+
+alt ePaymentMethod.BankTransfer
+
+OrderService->BankTransferPaymentProcessor:ProcessPayment
+activate BankTransferPaymentProcessor
+BankTransferPaymentProcessor-->OrderService:
+deactivate BankTransferPaymentProcessor
+
+else ePaymentMethod.OnlinePayment
+
+OrderService->OnlineBankingPaymentProcessor:ProcessPayment
+activate OnlineBankingPaymentProcessor
+OnlineBankingPaymentProcessor-->OrderService:
+deactivate OnlineBankingPaymentProcessor
+
+OrderService->OrderRepository:UpdateStatus
+activate OrderRepository
+OrderRepository-->OrderService:
+deactivate OrderRepository
+
+OrderService-->OrderController:
+deactivate OrderService
+
+end

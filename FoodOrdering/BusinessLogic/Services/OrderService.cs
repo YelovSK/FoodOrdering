@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FoodOrdering.BusinessLogic.DeliveryStrategy;
-using FoodOrdering.BusinessLogic.OrderState;
 using FoodOrdering.BusinessLogic.PaymentProcessor;
 using FoodOrdering.Dto;
 using FoodOrdering.Enums;

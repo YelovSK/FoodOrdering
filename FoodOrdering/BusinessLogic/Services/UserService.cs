@@ -17,7 +17,7 @@ public class UserService : IUserService
         _mapper = mapper;
     }
     
-    public UserDto GetUser(int userId)
+    public FullUserDto GetUser(int userId)
     {
         var user = _userRepository.GetById(userId);
         if (user == null)
@@ -25,7 +25,7 @@ public class UserService : IUserService
             throw new FoodOrderingException("User not found");
         }
         
-        return _mapper.Map<UserDto>(user);
+        return _mapper.Map<FullUserDto>(user);
     }
 
     public void UpdateEmail(int userId, string email)

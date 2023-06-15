@@ -1,5 +1,4 @@
-﻿using FoodOrdering.BusinessLogic.DeliveryStrategy;
-using FoodOrdering.Dto;
+﻿using FoodOrdering.Dto;
 using FoodOrdering.Enums;
 using FoodOrdering.Exceptions;
 using FoodOrdering.Repositories;
